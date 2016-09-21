@@ -1,6 +1,6 @@
 package com.zzz.draw.code;
 
-import com.zzz.draw.util.ByteToPointsUtil;
+import com.zzz.draw.bean.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -23,7 +23,7 @@ public class MessageDecoder extends MessageToMessageDecoder<ByteBuf> {
         if(trueLength<=len){
             byte[] dst = new byte[trueLength];
             byteBuf.readBytes(dst);
-            list.add(ByteToPointsUtil.decode(dst));
+            list.add(Message.parseForm(dst));
             byteBuf.discardReadBytes();
         }else{
             byteBuf.resetReaderIndex();

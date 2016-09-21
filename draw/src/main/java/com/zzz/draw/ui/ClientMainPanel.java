@@ -1,5 +1,6 @@
 package com.zzz.draw.ui;
 
+import com.zzz.draw.bean.Message;
 import com.zzz.draw.tcp.TcpClient;
 
 import javax.swing.*;
@@ -36,6 +37,9 @@ public class ClientMainPanel extends JFrame {
     }
 
     public void sendMsg(LinkedList<Point> points){
-        tcpClient.sendMsg(points);
+        Message message = new Message();
+        message.setType(Message.POINT);
+        message.setBody(points);
+        tcpClient.sendMsg(message);
     }
 }

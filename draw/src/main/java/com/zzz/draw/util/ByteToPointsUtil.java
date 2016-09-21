@@ -22,6 +22,15 @@ public class ByteToPointsUtil {
         return points;
     }
 
+    public static  LinkedList<Point> decode( DataInputStream dataInputStream,int len) throws IOException {
+        LinkedList<Point> points = new LinkedList<Point>();
+        for (int i = 0; i < len; i++) {
+            points.add(new Point(dataInputStream.readInt(),dataInputStream.readInt()));
+
+        }
+        return points;
+    }
+
     public static DataInputStream dataInputStream(byte[] buf){
         ByteArrayInputStream inputStream = new ByteArrayInputStream(buf);
         return new DataInputStream(inputStream);
