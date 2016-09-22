@@ -1,6 +1,8 @@
 package com.zzz.draw.tcp;
 
 import com.zzz.draw.bean.Message;
+import com.zzz.draw.content.ApplicationContext;
+import com.zzz.draw.handler.MessageHandler;
 import com.zzz.draw.ui.ServerMainPanel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -22,6 +24,10 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<Message> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
-        serverMainPanel.drawLine((LinkedList<Point>) message.getBody());
+        MessageHandler handler = (MessageHandler) ApplicationContext.getInstance().get("handler_" + message.getType());
+        message = handler.handler(message.getByteBuf());
+        if(message !=null){
+            channelHandlerContext.writeAndFlush(message);
+        }
     }
 }

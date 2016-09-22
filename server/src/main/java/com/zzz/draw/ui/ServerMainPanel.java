@@ -1,6 +1,11 @@
 package com.zzz.draw.ui;
 
+import com.zzz.draw.bean.Message;
+import com.zzz.draw.content.ApplicationContext;
+import com.zzz.draw.handler.PointHandler;
+import com.zzz.draw.handler.UserHandler;
 import com.zzz.draw.tcp.TcpServer;
+import javafx.application.Application;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +20,12 @@ public class ServerMainPanel extends JFrame {
 
     private  DrawPanel drawPanel;
 
+    private static ServerMainPanel  INSTANCE;
+
+    public static ServerMainPanel getInstance() {
+        return INSTANCE;
+    }
+
     public ServerMainPanel(){
         try {
             tcpServer = new TcpServer(this);
@@ -27,6 +38,7 @@ public class ServerMainPanel extends JFrame {
         this.setLayout(null);
         drawPanel = new DrawPanel(this);
         this.add(drawPanel);
+        INSTANCE = this;
         this.setVisible(true);
     }
 
@@ -36,8 +48,14 @@ public class ServerMainPanel extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        initHandler();
         new ServerMainPanel();
 
+    }
+    private static void initHandler(){
+        ApplicationContext context = new ApplicationContext();
+        context.add("handler_"+ Message.POINT,new PointHandler());
+        context.add("handler_"+ Message.LINK,new UserHandler());
     }
 
     public void drawLine(LinkedList<Point> points){
