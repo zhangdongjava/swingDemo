@@ -1,5 +1,6 @@
 package com.zzz.draw.decoder;
 
+import com.zzz.draw.bean.SendFile;
 import com.zzz.draw.bean.User;
 import com.zzz.draw.util.ByteToPointsUtil;
 import io.netty.buffer.ByteBuf;
@@ -10,7 +11,7 @@ import java.util.LinkedList;
 /**
  * Created by dell_2 on 2016/9/22.
  */
-public class BeanDecoder  {
+public class BeanDecoder {
     public static User userParseForm(ByteBuf buf) {
         User user = new User();
         int ipLen = buf.readInt();
@@ -31,5 +32,17 @@ public class BeanDecoder  {
         byte[] bytes = new byte[buf.readableBytes()];
         buf.readBytes(bytes);
         return new String(bytes);
+    }
+
+    public static SendFile fileParseForm(ByteBuf buf) {
+        SendFile file = new SendFile();
+        int nameLen = buf.readInt();
+        byte[] nameBytes = new byte[nameLen];
+        buf.readBytes(nameBytes);
+        file.setFileName(new String(nameBytes));
+        byte[] bytes = new byte[buf.readableBytes()];
+        buf.readBytes(bytes);
+        file.setBytes(bytes);
+        return file;
     }
 }

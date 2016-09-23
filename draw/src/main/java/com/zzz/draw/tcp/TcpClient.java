@@ -11,10 +11,11 @@ public class TcpClient {
     public static String HOST = "127.0.0.1";
     public static int PORT = 6789;
 
-    public  Bootstrap bootstrap = getBootstrap();
+    public  Bootstrap bootstrap;
     public  Channel channel ;
 
     public TcpClient(){
+        bootstrap = getBootstrap();
         channel = getChannel(HOST,PORT);
     }
     /**
@@ -31,7 +32,7 @@ public class TcpClient {
                 ChannelPipeline pipeline = ch.pipeline();
                 pipeline.addLast("decoder", new MessageDecoder());
                 pipeline.addLast("encoder", new MessageEncoder());
-                pipeline.addLast("handler", new TcpClientHandler());
+                pipeline.addLast("handler", new TcpClientHandler(TcpClient.this));
             }
         });
         b.option(ChannelOption.SO_KEEPALIVE, true);
@@ -39,7 +40,6 @@ public class TcpClient {
     }
 
     public  final Channel getChannel(String host,int port){
-        Channel channel = null;
         try {
             channel = bootstrap.connect(host, port).sync().channel();
         } catch (Exception e) {

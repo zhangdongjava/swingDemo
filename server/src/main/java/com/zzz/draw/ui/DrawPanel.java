@@ -1,7 +1,12 @@
 package com.zzz.draw.ui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -17,7 +22,14 @@ public class DrawPanel extends JPanel {
     private Color color;
     private ServerMainPanel mainPanel;
 
+    private static DrawPanel  INSTANCE;
+
+    public static DrawPanel getInstance() {
+        return INSTANCE;
+    }
+
     public DrawPanel(ServerMainPanel mainPanel) {
+        INSTANCE = this;
         this.mainPanel = mainPanel;
         this.setSize(mainPanel.getSize());
         this.setLocation(0, 0);
@@ -47,6 +59,16 @@ public class DrawPanel extends JPanel {
             first = point;
         }
         this.repaint();
+    }
+
+    public void drawImage(byte[] buf){
+        InputStream in  = new ByteArrayInputStream(buf);
+        try {
+            image.getGraphics().drawImage(ImageIO.read(in),0,0,null);
+            this.repaint();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

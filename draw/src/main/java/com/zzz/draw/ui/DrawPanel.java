@@ -23,8 +23,8 @@ public class DrawPanel extends JPanel {
         this.mainPanel = mainPanel;
         randomColor();
         MouseEventImpl mouseEvent = new MouseEventImpl(this);
-        this.setSize(mainPanel.getSize());
-        this.setLocation(0,0);
+        this.setSize(mainPanel.getWidth()-200,mainPanel.getHeight());
+        this.setLocation(200,0);
         this.addMouseMotionListener(mouseEvent);
         this.addMouseListener(mouseEvent);
     }

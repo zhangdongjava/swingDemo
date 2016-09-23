@@ -1,6 +1,7 @@
 package com.zzz.draw.ui;
 
 import com.zzz.draw.bean.Message;
+import com.zzz.draw.bean.MessageCode;
 import com.zzz.draw.bean.User;
 import com.zzz.draw.encoder.ObjectEncoder;
 import com.zzz.draw.tcp.TcpClient;
@@ -8,6 +9,7 @@ import com.zzz.draw.util.SystemUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
 
@@ -23,10 +25,11 @@ public class ClientMainPanel extends JFrame {
         tcpClient = new TcpClient();
         System.out.println("启动完毕!");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(700,600);
+        this.setSize(800,600);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.add(new DrawPanel(this));
+        this.add(new LeftPanel(this));
         this.setVisible(true);
     }
 
@@ -53,7 +56,7 @@ public class ClientMainPanel extends JFrame {
 
     public   void sendTest(int x){
         Message message = new Message();
-        message.setType(Message.LINK);
+        message.setType(MessageCode.LINK);
         User user = new User();
         try {
             user.setIp(SystemUtil.getIp());
@@ -68,10 +71,14 @@ public class ClientMainPanel extends JFrame {
 
     public void sendMsg(LinkedList<Point> points){
         Message message = new Message();
-        message.setType(Message.POINT);
+        message.setType(MessageCode.POINT);
         message.setBody(ObjectEncoder.addPointsBytes(points));
         tcpClient.sendMsg(message);
     }
+    public void sendMsg(Message message){
+        tcpClient.sendMsg(message);
+    }
+
 
     private  class  Mthread implements  Runnable{
         private int x;

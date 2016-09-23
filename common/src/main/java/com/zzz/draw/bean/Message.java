@@ -12,9 +12,7 @@ import java.io.IOException;
  */
 public class Message {
 
-    public final static int  MSG = 1;
-    public final static int  LINK = 3;
-    public final static int  POINT = 2;
+
     private int type;
     private byte[] body;
     private ByteBuf byteBuf;
@@ -44,13 +42,12 @@ public class Message {
     }
 
     public byte[] toBytes() throws IOException {
-        ByteArrayOutputStream out  = new ByteArrayOutputStream();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         DataOutputStream dataOut = new DataOutputStream(out);
         dataOut.writeInt(type);
         dataOut.write(body);
         return out.toByteArray();
     }
-
 
 
     public static Message parseForm(byte[] bytes) throws IOException, IllegalAccessException {

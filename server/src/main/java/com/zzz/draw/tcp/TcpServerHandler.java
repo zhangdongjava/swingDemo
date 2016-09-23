@@ -25,7 +25,7 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<Message> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
         MessageHandler handler = (MessageHandler) ApplicationContext.getInstance().get("handler_" + message.getType());
-        message = handler.handler(message.getByteBuf());
+        message = handler.handler(message.getByteBuf(),channelHandlerContext);
         if(message !=null){
             channelHandlerContext.writeAndFlush(message);
         }

@@ -28,7 +28,6 @@ public class MessageDecoder extends ByteToMessageDecoder {
         }else{
             byteBuf.resetReaderIndex();
         }
-        System.out.println(this);
     }
 
 

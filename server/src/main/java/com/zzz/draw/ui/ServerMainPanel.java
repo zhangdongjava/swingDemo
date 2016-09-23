@@ -1,11 +1,12 @@
 package com.zzz.draw.ui;
 
 import com.zzz.draw.bean.Message;
+import com.zzz.draw.bean.MessageCode;
 import com.zzz.draw.content.ApplicationContext;
+import com.zzz.draw.handler.FileHandler;
 import com.zzz.draw.handler.PointHandler;
 import com.zzz.draw.handler.UserHandler;
 import com.zzz.draw.tcp.TcpServer;
-import javafx.application.Application;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,14 +49,15 @@ public class ServerMainPanel extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        initHandler();
         new ServerMainPanel();
+        initContext();
 
     }
-    private static void initHandler(){
+    private static void initContext(){
         ApplicationContext context = new ApplicationContext();
-        context.add("handler_"+ Message.POINT,new PointHandler());
-        context.add("handler_"+ Message.LINK,new UserHandler());
+        context.add("handler_"+ MessageCode.POINT,new PointHandler());
+        context.add("handler_"+ MessageCode.LINK,new UserHandler());
+        context.add("handler_"+ MessageCode.FILE,new FileHandler());
     }
 
     public void drawLine(LinkedList<Point> points){
