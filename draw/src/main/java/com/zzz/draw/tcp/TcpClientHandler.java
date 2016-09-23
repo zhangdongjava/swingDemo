@@ -48,8 +48,8 @@ public class TcpClientHandler extends SimpleChannelInboundHandler<Message> {
             Channel res = tcpClient.getChannel(tcpClient.HOST, tcpClient.PORT);
             while (res == null) {
                 TimeUnit.SECONDS.sleep(1);
-                res = tcpClient.getChannel(tcpClient.HOST, tcpClient.PORT);
                 System.out.println("重新连接。。。!");
+                res = tcpClient.getChannel(tcpClient.HOST, tcpClient.PORT);
             }
             System.out.println("连接成功!。。。!");
         } catch (Exception e) {
