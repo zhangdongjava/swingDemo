@@ -42,6 +42,9 @@ public class TcpClient {
     public  final Channel getChannel(String host,int port){
         try {
             channel = bootstrap.connect(host, port).sync().channel();
+            while(channel == null){
+                channel = bootstrap.connect(host, port).sync().channel();
+            }
         } catch (Exception e) {
             return null;
         }

@@ -20,6 +20,7 @@ public class ClientMainPanel extends JFrame {
 
     private  TcpClient tcpClient;
 
+
     public ClientMainPanel(){
         System.out.println("启动服务!");
         tcpClient = new TcpClient();

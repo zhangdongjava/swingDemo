@@ -19,14 +19,25 @@ public class DrawPanel extends JPanel {
     private Color color;
     private ClientMainPanel mainPanel;
 
+    private static DrawPanel  INSTANCE;
+
+    public static DrawPanel getInstance() {
+        return INSTANCE;
+    }
+
     public DrawPanel(ClientMainPanel mainPanel) {
         this.mainPanel = mainPanel;
+        INSTANCE = this;
         randomColor();
         MouseEventImpl mouseEvent = new MouseEventImpl(this);
         this.setSize(mainPanel.getWidth()-200,mainPanel.getHeight());
         this.setLocation(200,0);
         this.addMouseMotionListener(mouseEvent);
         this.addMouseListener(mouseEvent);
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     @Override
@@ -64,5 +75,6 @@ public class DrawPanel extends JPanel {
         int c = random.nextInt(255);
         color = new Color(a,b,c);
     }
+
 
 }
