@@ -23,22 +23,31 @@ public class MessageDecoder extends ByteToMessageDecoder {
         } else {
             byteBuf.writeBytes(buf);
         }
-        readMessage(list);
+        //一次数据可能是2个甚至多个message的粘包 所以要循环读取
+        while (readMessage(list));
         byteBuf.discardReadBytes();
     }
 
-    private  void readMessage(List list) throws IOException, IllegalAccessException {
+    /**
+     * 读取数据转化为message
+     * @param list
+     * @throws IOException
+     * @throws IllegalAccessException
+     */
+    private  boolean readMessage(List list) throws IOException, IllegalAccessException {
         byteBuf.markReaderIndex();
         int len = byteBuf.readableBytes();
-        if(len<4)return;
+        if(len<4)return false;
         int  trueLength = byteBuf.readInt();
-        if(trueLength<=len){
+        //已经读取了一个int 所以要减去4
+        if(trueLength<=(len-4)){
             byte[] dst = new byte[trueLength];
             byteBuf.readBytes(dst);
             list.add(Message.parseForm(dst));
-            readMessage(list);
+            return true;
         }else{
             byteBuf.resetReaderIndex();
+            return false;
         }
     }
 
