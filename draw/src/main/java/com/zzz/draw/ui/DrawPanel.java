@@ -47,7 +47,7 @@ public class DrawPanel extends JPanel {
             Graphics gg = image.getGraphics();
             gg.setColor(Color.red);
         }
-        super.paintComponent(g);
+        //super.paintComponent(g);
         g.drawImage(image, 0, 0, null);
     }
 

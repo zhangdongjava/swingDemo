@@ -35,27 +35,13 @@ public class TcpClientHandler extends SimpleChannelInboundHandler<Message> {
             try {
                 System.out.println("IOException");
                 ctx.channel().disconnect();
-                reConnect(ctx);
+                TcpClient.reConnect();
             } catch (Exception e) {
-                reConnect(ctx);
+                TcpClient.reConnect();
                 System.out.println(e.toString());
             }
         }
     }
 
-    private void reConnect(ChannelHandlerContext ctx) {
-        try {
-            Channel res = tcpClient.getChannel(tcpClient.HOST, tcpClient.PORT);
-            while (res == null) {
-                TimeUnit.SECONDS.sleep(1);
-                System.out.println("重新连接。。。!");
-                res = tcpClient.getChannel(tcpClient.HOST, tcpClient.PORT);
-            }
-            System.out.println("连接成功!。。。!");
-        } catch (Exception e) {
-            reConnect(ctx);
-            System.out.println(e.toString());
-        }
 
-    }
 }

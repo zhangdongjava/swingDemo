@@ -37,7 +37,7 @@ public class TcpServer {
             public void initChannel(SocketChannel ch) throws Exception {
                 ChannelPipeline pipeline = ch.pipeline();
                 pipeline.addLast("decoder", new MessageDecoder());
-                pipeline.addLast("encoder", new MessageEncoder());
+              //  pipeline.addLast("encoder", new MessageEncoder());
                 pipeline.addLast(new TcpServerHandler(serverMainPanel));
             }
         });

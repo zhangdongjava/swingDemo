@@ -5,6 +5,7 @@ import com.zzz.draw.bean.MessageCode;
 import com.zzz.draw.content.ApplicationContext;
 import com.zzz.draw.handler.FileHandler;
 import com.zzz.draw.handler.PointHandler;
+import com.zzz.draw.handler.StringHandler;
 import com.zzz.draw.handler.UserHandler;
 import com.zzz.draw.tcp.TcpServer;
 
@@ -58,6 +59,7 @@ public class ServerMainPanel extends JFrame {
         context.add("handler_"+ MessageCode.POINT,new PointHandler());
         context.add("handler_"+ MessageCode.LINK,new UserHandler());
         context.add("handler_"+ MessageCode.FILE,new FileHandler());
+        context.add("handler_"+ MessageCode.STRING,new StringHandler());
     }
 
     public void drawLine(LinkedList<Point> points){
