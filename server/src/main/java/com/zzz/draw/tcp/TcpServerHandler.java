@@ -16,7 +16,6 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<Message> {
     private ServerMainPanel serverMainPanel;
 
     private int count ;
-    private int dataCount ;
 
     public TcpServerHandler(ServerMainPanel serverMainPanel) {
 
@@ -25,6 +24,7 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<Message> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
+        System.out.println(this);
         //System.out.println(dataCount+=message.getByteBuf().readableBytes());
         MessageHandler handler = (MessageHandler) ApplicationContext.getInstance().get("handler_" + message.getType());
         System.out.println("服务器收到消息:"+((++count)+"->")+message.getByteBuf().readableBytes());
