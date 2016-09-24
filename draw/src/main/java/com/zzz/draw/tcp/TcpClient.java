@@ -71,7 +71,7 @@ public class TcpClient {
 
 
     public  void sendTest() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             Message message = new Message();
             message.setBody("测试数据!".getBytes());
             message.setType(MessageCode.STRING);
@@ -92,6 +92,7 @@ public class TcpClient {
      */
     private void sendMessage(){
         ThreadUtil.submit(()->{
+            sendTest();
             try {
                 while(true){
                     Message message = messageQueue.take();
