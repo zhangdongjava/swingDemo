@@ -22,12 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="show" />
+        <module name="hubServer" />
+        <module name="javafx" />
+        <module name="pokerServer1" />
+        <module name="server" />
+        <module name="wzq" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="draw" target="1.5" />
-      <module name="show" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
