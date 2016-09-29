@@ -1,0 +1,10 @@
+package com.zzz.game.hub.jms;
+
+/**
+ * Created by dell_2 on 2016/9/29.
+ */
+public class Tytt {
+    public static void main(String[] args) {
+        new Aaaaaaa();
+    }
+}

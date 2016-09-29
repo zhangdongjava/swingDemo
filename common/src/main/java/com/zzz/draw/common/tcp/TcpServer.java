@@ -24,8 +24,8 @@ public class TcpServer {
      * 业务出现线程大小
      */
     protected static final int BIZTHREADSIZE = 4;
-    private static final EventLoopGroup bossGroup = new NioEventLoopGroup(BIZGROUPSIZE);
-    private static final EventLoopGroup workerGroup = new NioEventLoopGroup(BIZTHREADSIZE);
+    private  final EventLoopGroup bossGroup = new NioEventLoopGroup(BIZGROUPSIZE);
+    private  final EventLoopGroup workerGroup = new NioEventLoopGroup(BIZTHREADSIZE);
 
     public TcpServer(String ip, int port, final SimpleChannelInboundHandler<Message> serverHandler) throws Exception {
         ServerBootstrap b = new ServerBootstrap();

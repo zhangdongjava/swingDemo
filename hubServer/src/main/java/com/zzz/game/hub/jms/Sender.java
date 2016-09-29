@@ -13,13 +13,11 @@ public class Sender {
     private Destination destination;
 
     public void sendInfo() {
-        for (int i = 0; i < 10; i++) {
-            jmsTemplate.send(destination, session -> {
-                TextMessage message = session.createTextMessage();
-                message.setText("你好啊！！！！！！！");
-                return message;
-            });
+        jmsTemplate.send(destination, session -> {
+            TextMessage message = session.createTextMessage();
+            message.setText("你好啊！！！！！！！");
+            return message;
+        });
 
-        }
     }
 }
