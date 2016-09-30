@@ -10,11 +10,11 @@ public class ThreadUtil {
 
     public volatile static int  taskCount = 0;
 
-    private static ExecutorService exec = Executors.newSingleThreadExecutor();
+    private  ExecutorService exec = Executors.newSingleThreadExecutor();
 
 
 
-    public static void submit(Runnable task){
+    public  void submit(Runnable task){
         System.out.println("添加一次任务!!!");
         taskCount ++;
         exec.submit(task);

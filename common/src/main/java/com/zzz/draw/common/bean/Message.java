@@ -17,6 +17,7 @@ public class Message {
     private byte[] body;
     private ByteBuf byteBuf;
 
+
     public int getType() {
         return type;
     }

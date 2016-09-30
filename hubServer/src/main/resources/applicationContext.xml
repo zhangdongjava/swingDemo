@@ -6,6 +6,7 @@
 	
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:annotation-config/>
+    <context:property-placeholder location="classpath*:constans.properties"/>
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://localhost:61616"/>
@@ -25,4 +26,8 @@
         <constructor-arg value="topic"/>
     </bean>
     <bean id="consumer" class="com.zzz.game.hub.jms.Sender"></bean>
+    <bean id="constans" class="com.zzz.draw.common.util.Constans">
+        <property name="hubPort" value="${hubPort}"></property>
+    </bean>
+    <import resource="applicationContext-handler.xml"/>
 </beans>

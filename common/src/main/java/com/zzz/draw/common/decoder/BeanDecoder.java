@@ -1,5 +1,6 @@
 package com.zzz.draw.common.decoder;
 
+import com.zzz.draw.common.bean.IpPort;
 import com.zzz.draw.common.bean.SendFile;
 import com.zzz.draw.common.bean.User;
 import com.zzz.draw.common.util.ByteToPointsUtil;
@@ -44,5 +45,14 @@ public class BeanDecoder {
         buf.readBytes(bytes);
         file.setBytes(bytes);
         return file;
+    }
+
+    public static IpPort ipPortParseForm(ByteBuf buf) {
+        IpPort ipPort = new IpPort();
+        ipPort.setPort(buf.readInt());
+        byte[] bytes = new byte[buf.readableBytes()];
+        buf.readBytes(bytes);
+        ipPort.setIp(new String(bytes));
+        return ipPort;
     }
 }

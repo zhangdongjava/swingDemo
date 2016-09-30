@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/draw/draw.iml" filepath="$PROJECT_DIR$/draw/draw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gameServer/gameServer.iml" filepath="$PROJECT_DIR$/gameServer/gameServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/hubServer/hubServer.iml" filepath="$PROJECT_DIR$/hubServer/hubServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/javafx/javafx.iml" filepath="$PROJECT_DIR$/javafx/javafx.iml" />
       <module fileurl="file://$PROJECT_DIR$/pokerServer1/pokerServer1.iml" filepath="$PROJECT_DIR$/pokerServer1/pokerServer1.iml" />
